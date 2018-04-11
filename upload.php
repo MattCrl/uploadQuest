@@ -38,8 +38,6 @@ if (!empty($_FILES)) {
                     $fileNewName = uniqid('image-', true) . "." . $fileActualExt;
                     $fileDestination = 'uploads/' . $fileNewName;
                     move_uploaded_file($fileTmpName, $fileDestination);
-                    header("Location: index.php");
-                    exit();
                 } else {
                     echo "Your file is too big";
                 }
@@ -51,3 +49,6 @@ if (!empty($_FILES)) {
         }
     }
 }
+
+header("Location: index.php");
+exit();
