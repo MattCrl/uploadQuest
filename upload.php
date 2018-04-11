@@ -16,37 +16,38 @@
 }*/
 
 if (!empty($_FILES)) {
+
     $total = count($_FILES['file']['name']);
-    echo $total;
-
-    $file = $_FILES['file'];
-    $fileName = $_FILES['file']['name'];
-    $fileTmpName = $_FILES['file']['tmp_name'];
-    $fileSize = $_FILES['file']['size'];
-    $fileError = $_FILES['file']['error'];
-    $fileType = $_FILES['file']['type'];
-
-    $fileExt = explode('.', $fileName);
-    $fileActualExt = strtolower(end($fileExt));
-
     $allowed = ['jpg', 'jpeg', 'png', 'gif'];
 
-    if (in_array($fileActualExt, $allowed)) {
-        if ($fileError === 0) {
-            if ($fileSize < 1000000) {
-                $fileNewName = uniqid('image-', true) . "." . $fileActualExt;
-                $fileDestination = 'uploads/' . $fileNewName;
-                move_uploaded_file($fileTmpName, $fileDestination);
-                header("Location: index.php");
-                exit();
+    for ($i=0; $i<$total; $i++) {
+        $file = $_FILES['file'];
+        $fileName = $_FILES['file']['name'][$i];
+        $fileTmpName = $_FILES['file']['tmp_name'][$i];
+        $fileSize = $_FILES['file']['size'][$i];
+        $fileError = $_FILES['file']['error'][$i];
+        $fileType = $_FILES['file']['type'][$i];
+
+        $fileExt = explode('.', $fileName);
+        $fileActualExt = strtolower(end($fileExt));
+
+        echo $_FILES['file']['name'][$i] . '<br/>';
+        if (in_array($fileActualExt, $allowed)) {
+            if ($fileError === 0) {
+                if ($fileSize < 1000000) {
+                    $fileNewName = uniqid('image-', true) . "." . $fileActualExt;
+                    $fileDestination = 'uploads/' . $fileNewName;
+                    move_uploaded_file($fileTmpName, $fileDestination);
+                    header("Location: index.php");
+                    exit();
+                } else {
+                    echo "Your file is too big";
+                }
             } else {
-                echo "Your file is too big";
+                echo "There was an error uploading your file";
             }
         } else {
-            echo "There was an error uploading your file";
+            echo "You can't upload that type of file";
         }
-    } else {
-        echo "You can't upload that type of file";
     }
-
 }

@@ -17,7 +17,7 @@
     <h2>Upload your file :</h2>
     <form method="POST" action="upload.php" enctype="multipart/form-data">
         <div class="form-group">
-        <input type="file" name="file" multiple="multiple">
+        <input type="file" name="file[]" multiple="multiple">
         </div>
         <div class="form-group">
         <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
