@@ -1,0 +1,15 @@
+.thumbnail {
+    height: 300px;
+
+}
+
+.thumbnail img {
+    display: block;
+    height: 60%;
+    width: 100%;
+    object-fit: cover;
+}
+
+h3 {
+    font-size: 15px;
+}
