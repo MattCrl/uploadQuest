@@ -17,6 +17,7 @@
 
 if (!empty($_FILES)) {
 
+    $success = [];
     $errors = [];
     $total = count($_FILES['file']['name']);
     $allowed = ['jpg', 'jpeg', 'png', 'gif'];
@@ -38,20 +39,24 @@ if (!empty($_FILES)) {
                     $fileNewName = uniqid('image-', true) . "." . $fileActualExt;
                     $fileDestination = 'uploads/' . $fileNewName;
                     move_uploaded_file($fileTmpName, $fileDestination);
+                    $success = 'The file ' . $fileName = $_FILES['file']['name'][$i] . 'has successfully been uploaded';
                 } else {
-                    $errors = "Your file is too big";
+                    $errors = 'The file ' . $fileName = $_FILES['file']['name'][$i] . 'is too big';
                 }
             } else {
                 $errors = "There was an error uploading your file";
             }
         } else {
-            $errors = "You can't upload that type of file";
+            $errors = 'The type of the file ' . $fileName = $_FILES['file']['name'][$i] . 'isn\' correct';
         }
     }
 }
 
 if (!empty($errors)) {
     echo $errors . '<br />';
+    if (!empty($success)) {
+        echo $success . '<br />';
+    }
     ?>
     <a href="index.php">Back to galery</a>
 <?php
