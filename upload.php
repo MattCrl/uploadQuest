@@ -39,15 +39,15 @@ if (!empty($_FILES)) {
                     $fileNewName = uniqid('image-', true) . "." . $fileActualExt;
                     $fileDestination = 'uploads/' . $fileNewName;
                     move_uploaded_file($fileTmpName, $fileDestination);
-                    $success = 'The file ' . $fileName = $_FILES['file']['name'][$i] . 'has successfully been uploaded';
+                    $success = 'The file ' . $fileName = $_FILES['file']['name'][$i] . ' has successfully been uploaded';
                 } else {
-                    $errors = 'The file ' . $fileName = $_FILES['file']['name'][$i] . 'is too big';
+                    $errors = 'The file ' . $fileName = $_FILES['file']['name'][$i] . ' is too big';
                 }
             } else {
                 $errors = "There was an error uploading your file";
             }
         } else {
-            $errors = 'The type of the file ' . $fileName = $_FILES['file']['name'][$i] . 'isn\' correct';
+            $errors = 'The type of the file ' . $fileName = $_FILES['file']['name'][$i] . ' isn\' correct';
         }
     }
 }
