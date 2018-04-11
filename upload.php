@@ -17,6 +17,7 @@
 
 if (!empty($_FILES)) {
 
+    $errors = [];
     $total = count($_FILES['file']['name']);
     $allowed = ['jpg', 'jpeg', 'png', 'gif'];
 
@@ -31,7 +32,6 @@ if (!empty($_FILES)) {
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt));
 
-        echo $_FILES['file']['name'][$i] . '<br/>';
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
                 if ($fileSize < 1000000) {
@@ -39,16 +39,25 @@ if (!empty($_FILES)) {
                     $fileDestination = 'uploads/' . $fileNewName;
                     move_uploaded_file($fileTmpName, $fileDestination);
                 } else {
-                    echo "Your file is too big";
+                    $errors = "Your file is too big";
                 }
             } else {
-                echo "There was an error uploading your file";
+                $errors = "There was an error uploading your file";
             }
         } else {
-            echo "You can't upload that type of file";
+            $errors = "You can't upload that type of file";
         }
     }
 }
 
-header("Location: index.php");
-exit();
+if (!empty($errors)) {
+    echo $errors . '<br />';
+    ?>
+    <a href="index.php">Back to galery</a>
+<?php
+} else {
+    header("Location: index.php");
+    exit();
+}
+
+?>
