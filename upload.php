@@ -84,7 +84,8 @@ if (!empty($errors)) {
 <?php
 } else {
     ?>
-    <h1>You will be redirected in 5 seconds</h1>
+    <h1>Succes !</h1>
+    <h2>You will be redirected in 5 seconds</h2>
     <?php
     foreach($success as $oneSuccess) {
         echo '<p><span class="success">' . $oneSuccess . '</span></p>';
