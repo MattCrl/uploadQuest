@@ -71,7 +71,9 @@ if (!empty($errors)) {
     ?>
     <h1>There was a problem uploading your file(s) :</h1>
     <?php
-    echo '<p><span class="error">' . $errors . '</span></p>';
+    foreach($errors as $error) {
+        echo '<p><span class="error">' . $error . '</span></p>';
+    }
     if (!empty($success)) {
         foreach($success as $oneSuccess) {
             echo '<p><span class="success">' . $oneSuccess . '</span></p>';
