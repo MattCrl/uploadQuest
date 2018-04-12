@@ -54,15 +54,15 @@ if (!empty($_FILES)) {
                     $fileNewName = uniqid('image-', true) . "." . $fileActualExt;
                     $fileDestination = 'uploads/' . $fileNewName;
                     move_uploaded_file($fileTmpName, $fileDestination);
-                    $success = 'The file ' . $fileName = $_FILES['file']['name'][$i] . ' has successfully been uploaded';
+                    $success[] = 'The file ' . $fileName = $_FILES['file']['name'][$i] . ' has successfully been uploaded <br />';
                 } else {
-                    $errors = 'The file ' . $fileName = $_FILES['file']['name'][$i] . ' is too big';
+                    $errors[] = 'The file ' . $fileName = $_FILES['file']['name'][$i] . ' is too big <br />';
                 }
             } else {
-                $errors = "There was an error uploading your file";
+                $errors[] = "There was an error uploading your file";
             }
         } else {
-            $errors = 'The type of the file ' . $fileName = $_FILES['file']['name'][$i] . ' isn\' correct';
+            $errors[] = 'The type of the file ' . $fileName = $_FILES['file']['name'][$i] . ' isn\' correct';
         }
     }
 }
@@ -73,13 +73,21 @@ if (!empty($errors)) {
     <?php
     echo '<p><span class="error">' . $errors . '</span></p>';
     if (!empty($success)) {
-        echo '<p><span class="success">' . $success . '</span></p>';
+        foreach($success as $oneSuccess) {
+            echo '<p><span class="success">' . $oneSuccess . '</span></p>';
+        }
     }
     ?>
     <a href="index.php" class="btn btn-primary" role="button">Back to galery</a>
 <?php
 } else {
-    header("Location: index.php");
+    ?>
+    <h1>You will be redirected in 5 seconds</h1>
+    <?php
+    foreach($success as $oneSuccess) {
+        echo '<p><span class="success">' . $oneSuccess . '</span></p>';
+    }
+    header("refresh:5;url=index.php");
     exit();
 }
 
