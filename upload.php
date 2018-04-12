@@ -1,3 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Upload quest</title>
+</head>
+
+<body>
+<div class="container">
+
 <?php
 /*if(isset($_FILES['quest']))
 {
@@ -53,12 +68,15 @@ if (!empty($_FILES)) {
 }
 
 if (!empty($errors)) {
-    echo $errors . '<br />';
+    ?>
+    <h1>There was a problem uploading your file(s) :</h1>
+    <?php
+    echo '<p><span class="error">' . $errors . '</span></p>';
     if (!empty($success)) {
-        echo $success . '<br />';
+        echo '<p><span class="success">' . $success . '</span></p>';
     }
     ?>
-    <a href="index.php">Back to galery</a>
+    <a href="index.php" class="btn btn-primary" role="button">Back to galery</a>
 <?php
 } else {
     header("Location: index.php");
@@ -66,3 +84,7 @@ if (!empty($errors)) {
 }
 
 ?>
+
+</div>
+</body>
+</html>
